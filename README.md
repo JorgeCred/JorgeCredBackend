@@ -5,3 +5,7 @@
   - **Statistics**: Delivers insights about the users using the application;
   - **Transaction**: Manages the transactions in the system;
   - **Notifier**: Notifies everything that happens in the user (mainly transactions);
+ 
+## Architecture Diagram
+
+![alt text](https://github.com/JorgeCred/JorgeCredBackend/blob/main/JorgeCredArchitecture.png)
