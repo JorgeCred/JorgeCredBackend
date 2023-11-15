@@ -2,8 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
 const amqp = require('amqplib/callback_api')
+const config = require('../src/config')
 
-const amqp_conn = process.env.RABBITMQ_CONN
+const amqp_conn = config.amqp_conn
 
 const app = express()
 

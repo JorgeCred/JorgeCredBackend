@@ -4,7 +4,8 @@
   "description": "",
   "main": "client/index.js",
   "scripts": {
-    "start": "node client/index.js"
+    "start_client": "node client/index.js",
+    "start": "node src/app.js"
   },
   "author": "Caio",
   "license": "ISC",

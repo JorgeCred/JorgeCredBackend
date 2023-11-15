@@ -1,12 +1,12 @@
 const webPush = require('web-push')
 const amqp = require('amqplib')
+const config = require('./config')
 
-const queue = 'Bilu'
-
-const amqp_conn = process.env.RABBITMQ_CONN
-
-const publicVapidKey = process.env.PUBLIC_VAPID_KEY
-const privateVapidKey = process.env.PRIVATE_VAPID_KEY
+const queue = config.queue
+const amqp_conn = config.amqp_conn
+const publicVapidKey = config.publicVapidKey
+const privateVapidKey = config.privateVapidKey
+const jorgeCredIconUrl = config.jorgeCredIconUrl
 
 webPush.setVapidDetails('mailto:test@test.com', publicVapidKey, privateVapidKey)
 
@@ -21,16 +21,16 @@ function pushNotification(message) {
     const payload = JSON.stringify({
         title: requestBody.title,
         body: requestBody.body,
-        icon: 'https://raw.githubusercontent.com/JorgeCred/JorgeCredFrontend/main/resources/logo.png?token=GHSAT0AAAAAACKFVF5V2BBOY7EKQLGETIZGZKPZCCA',
+        icon: jorgeCredIconUrl,
     })
 
     console.log(
         ` [*] Push: title: '${requestBody.title}', body: '${requestBody.body}'`
     )
 
-    webPush.sendNotification(subscription, payload).catch((err) => {
-        console.error(err)
-    })
+    webPush
+        .sendNotification(subscription, payload)
+        .catch((err) => console.error(err))
 }
 
 ;(async () => {
