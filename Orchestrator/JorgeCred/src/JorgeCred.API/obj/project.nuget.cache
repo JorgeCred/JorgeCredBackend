@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "azT+Q2oA4srPQfGGC2++/T1KUq9kJHvMBNkQGMvtmj2+TRalsHJ4QRZa96F9aQln3YxwHcNaylTxUi08Du0Gwg==",
+  "dgSpecHash": "XeIYrJf0siUaHNBYfDpb/4rAfsWzwUfONfiPlmNS8PUt5JcxFtyKH11xKlxR6r+aWG99lirOywIHU1kb4SoVYQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeCred\\src\\JorgeCred.API\\JorgeCred.API.csproj",
+  "projectFilePath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeRelated\\JorgeCredBackend\\Orchestrator\\JorgeCred\\src\\JorgeCred.API\\JorgeCred.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gusta\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\gusta\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.13\\microsoft.aspnetcore.authentication.jwtbearer.7.0.13.nupkg.sha512",

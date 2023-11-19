@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeCred\\src\\JorgeCred.Domain\\JorgeCred.Domain.csproj": {}
+    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeRelated\\JorgeCredBackend\\Orchestrator\\JorgeCred\\src\\JorgeCred.Domain\\JorgeCred.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeCred\\src\\JorgeCred.Domain\\JorgeCred.Domain.csproj": {
+    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeRelated\\JorgeCredBackend\\Orchestrator\\JorgeCred\\src\\JorgeCred.Domain\\JorgeCred.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeCred\\src\\JorgeCred.Domain\\JorgeCred.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeRelated\\JorgeCredBackend\\Orchestrator\\JorgeCred\\src\\JorgeCred.Domain\\JorgeCred.Domain.csproj",
         "projectName": "JorgeCred.Domain",
-        "projectPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeCred\\src\\JorgeCred.Domain\\JorgeCred.Domain.csproj",
+        "projectPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeRelated\\JorgeCredBackend\\Orchestrator\\JorgeCred\\src\\JorgeCred.Domain\\JorgeCred.Domain.csproj",
         "packagesPath": "C:\\Users\\gusta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeCred\\src\\JorgeCred.Domain\\obj\\",
+        "outputPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeRelated\\JorgeCredBackend\\Orchestrator\\JorgeCred\\src\\JorgeCred.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gusta\\AppData\\Roaming\\NuGet\\NuGet.Config",

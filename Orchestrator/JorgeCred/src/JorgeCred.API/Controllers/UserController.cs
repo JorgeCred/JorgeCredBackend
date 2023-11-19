@@ -59,7 +59,7 @@ namespace JorgeCred.API.Controllers
                 .Include(x => x.Account)
                 .ToListAsync();
 
-            foreach (var user in users)
+            foreach (var user in users.Where(x => x.Account != null))
             {
                 user.Account.ApplicationUser = null;
             }

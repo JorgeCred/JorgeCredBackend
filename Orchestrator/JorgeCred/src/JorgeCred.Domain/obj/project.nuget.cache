@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pSXdMMpJP1bOKZO52Vv8NekhoYLk2Fl4HHIjbhhBVm96/geSr8oWZRPlM/0HMpxSXVryDacggh0dUoSH2HyeoQ==",
+  "dgSpecHash": "J1Qssqthbfqh+THbbkDN3B2RX3DTP7XlDHAqBG4n03+pHJpbjNzPJIWh4DOzQgHAIJX+ad08JozfZygwZldWGA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeCred\\src\\JorgeCred.Domain\\JorgeCred.Domain.csproj",
+  "projectFilePath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeRelated\\JorgeCredBackend\\Orchestrator\\JorgeCred\\src\\JorgeCred.Domain\\JorgeCred.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gusta\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.13\\microsoft.aspnetcore.cryptography.internal.7.0.13.nupkg.sha512",
     "C:\\Users\\gusta\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\7.0.13\\microsoft.aspnetcore.cryptography.keyderivation.7.0.13.nupkg.sha512",

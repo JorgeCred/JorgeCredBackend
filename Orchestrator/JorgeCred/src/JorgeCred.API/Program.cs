@@ -14,6 +14,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.RegisterServices(builder.Configuration);
 builder.Services.AddAuthentication(builder.Configuration);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -52,6 +63,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
+app.UseCors("AllowAll");
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {

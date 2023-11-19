@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeCred\\src\\JorgeCred.Application\\JorgeCred.Application.csproj",
+      "projectUniqueName": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeRelated\\JorgeCredBackend\\Orchestrator\\JorgeCred\\src\\JorgeCred.Application\\JorgeCred.Application.csproj",
       "projectName": "JorgeCred.Application",
-      "projectPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeCred\\src\\JorgeCred.Application\\JorgeCred.Application.csproj",
+      "projectPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeRelated\\JorgeCredBackend\\Orchestrator\\JorgeCred\\src\\JorgeCred.Application\\JorgeCred.Application.csproj",
       "packagesPath": "C:\\Users\\gusta\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeCred\\src\\JorgeCred.Application\\obj\\",
+      "outputPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\JorgeRelated\\JorgeCredBackend\\Orchestrator\\JorgeCred\\src\\JorgeCred.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gusta\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -10,3 +10,15 @@ C:\Users\gusta\OneDrive\Área de Trabalho\JorgeCred\src\JorgeCred.Domain\obj\Deb
 C:\Users\gusta\OneDrive\Área de Trabalho\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\JorgeCred.Domain.pdb
 C:\Users\gusta\OneDrive\Área de Trabalho\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\ref\JorgeCred.Domain.dll
 C:\Users\gusta\OneDrive\Área de Trabalho\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\JorgeCred.Domain.csproj.AssemblyReference.cache
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\bin\Debug\net7.0\JorgeCred.Domain.deps.json
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\bin\Debug\net7.0\JorgeCred.Domain.dll
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\bin\Debug\net7.0\JorgeCred.Domain.pdb
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\JorgeCred.Domain.csproj.AssemblyReference.cache
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\JorgeCred.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\JorgeCred.Domain.AssemblyInfoInputs.cache
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\JorgeCred.Domain.AssemblyInfo.cs
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\JorgeCred.Domain.csproj.CoreCompileInputs.cache
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\JorgeCred.Domain.dll
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\refint\JorgeCred.Domain.dll
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\JorgeCred.Domain.pdb
+C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\obj\Debug\net7.0\ref\JorgeCred.Domain.dll

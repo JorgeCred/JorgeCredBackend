@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = JorgeCred.Domain
-build_property.ProjectDir = C:\Users\gusta\OneDrive\Área de Trabalho\JorgeCred\src\JorgeCred.Domain\
+build_property.ProjectDir = C:\Users\gusta\OneDrive\Área de Trabalho\JorgeRelated\JorgeCredBackend\Orchestrator\JorgeCred\src\JorgeCred.Domain\
