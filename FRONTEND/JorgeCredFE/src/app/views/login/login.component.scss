@@ -1,0 +1,30 @@
+.my-component-class {
+  background-image: url('/assets/ismaeu.jpg');
+  background-size: cover; // Isso garante que a imagem cubra todo o componente
+  background-position: center; // Isso centraliza a imagem no componente
+  background-repeat: no-repeat; // Isso impede que a imagem se repita
+  // Defina a altura e a largura conforme necessário
+  height: 100vh; // Exemplo: altura total da viewport
+  width: 100%; // Exemplo: largura total
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.example-card {
+  width: 450px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.example-form {
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
