@@ -17,7 +17,7 @@
     ├── Orchestrator (Made with C#, Gustavo R. Pereira responsability)
     ├── StatisticsManager (Made with ??, Luan R. Boschini)
     ├── TransactionManager (Made with Golang, Igor Zimmer)
-    └── NotificationManager (Made with ??, Caio B. Pinho)
+    └── NotificationManager (Made with JavaScript, Caio B. Pinho)
 ```
  
 ## Architecture Diagram:

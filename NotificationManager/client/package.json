@@ -1,0 +1,25 @@
+{
+  "name": "web-push",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client/index.js",
+  "scripts": {
+    "start_client": "node client/index.js"
+  },
+  "author": "Caio",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "prettier": "3.0.3"
+  }
+}
