@@ -10,6 +10,7 @@ import {MatTableModule} from '@angular/material/table';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 export interface PeriodicElement {
   name: string;
@@ -29,7 +30,8 @@ export interface PeriodicElement {
     MatToolbarModule,
     MatTableModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTabsModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
@@ -65,6 +67,8 @@ export class DashboardComponent {
       next: () => {
         this.httpClient.get("https://localhost:7027/api/Transaction/ListTransactions")
           .subscribe(transacoes => this.TRANSACOES_DO_INDIVIDUO = transacoes as any)
+
+          this.httpClient.get("https://localhost:7027/api/User/GetUser").subscribe(x => this.meu_saldo = (x as any).account.balance)
       },
       error: (x) => {
         this.snackBar.open(x.error, 'x')

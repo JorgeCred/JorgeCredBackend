@@ -12,10 +12,8 @@
 }
 
 .tabelo {
-    max-width: 600px;
+    width: 100%;
     min-width: 50% !important;
-    max-height: 200px !important;
-    overflow: scroll;
 }
 
 .ctrn {
@@ -28,4 +26,15 @@
         gap: 20px;
         margin-top: 0px;
     }
+}
+
+.table-container {
+    height: 400px;
+    width: 600px;
+    overflow: scroll;
+}
+
+.jorge {
+    margin-top: 30px;
+    margin-left: 10px;
 }

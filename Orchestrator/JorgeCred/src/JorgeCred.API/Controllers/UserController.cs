@@ -51,6 +51,7 @@ namespace JorgeCred.API.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("ListUsers")]
         public async Task<IActionResult> ListUsers()
         {
@@ -73,6 +74,7 @@ namespace JorgeCred.API.Controllers
           var user = await UserManager
                 .Users
                 .Include(x => x.Account)
+                    .ThenInclude(x => x.Transactions)
                 .FirstOrDefaultAsync(x => x.Id == _identityService.GetUserIdFromToken(Request));
 
           user.Account.ApplicationUser = null;
