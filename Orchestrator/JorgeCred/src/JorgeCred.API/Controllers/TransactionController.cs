@@ -1,11 +1,13 @@
 ﻿using JorgeCred.Data.Context;
 using JorgeCred.Domain;
 using JorgeCred.Identity.Data;
+using JorgeCred.Identity.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace JorgeCred.API.Controllers
 {
@@ -18,19 +20,25 @@ namespace JorgeCred.API.Controllers
         private readonly DbSet<Transaction> Transactions;
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly IdentityDataContext DbContext;
-        public TransactionController(JorgeContext context, UserManager<ApplicationUser> userManager, IdentityDataContext dbContext)
+        private readonly IdentityService IdentityService;
+        public TransactionController(JorgeContext context, UserManager<ApplicationUser> userManager, IdentityDataContext dbContext, IdentityService identityService)
         {
             DbContext = dbContext;
             Transactions = DbContext.Set<Transaction>();
             UserManager = userManager;
+            IdentityService = identityService;
+
         }
 
         [HttpGet("ListTransactions")]
         public async Task<IActionResult> ListTransactions()
         {
+            var userId = IdentityService.GetUserIdFromToken(Request);
+
             var query = await Transactions
                 .Include(x => x.TargetAccount)
                 .Include(x => x.OriginAccount)
+                .Where(x => x.OriginAccount.ApplicationUserId == userId)
                 .ToListAsync();
 
             foreach (var transaction in query)
@@ -45,13 +53,15 @@ namespace JorgeCred.API.Controllers
         [HttpPost("Transact")]
         public async Task<IActionResult> Transact([FromBody] TransactionDTO transactiondto)
         {
-            var sourceUser = UserManager.Users.Include(x => x.Account).FirstOrDefault(x => x.Id == transactiondto.TargetSourceId);
+
+            var sourceUser = UserManager.Users.Include(x => x.Account).FirstOrDefault(x => x.Id == IdentityService.GetUserIdFromToken(Request));
             var targetUser = UserManager.Users.Include(x => x.Account).FirstOrDefault(x => x.Id == transactiondto.TargetUserId);
 
+            if (targetUser == null || sourceUser == null)
+                return BadRequest($"O usuario de id: {transactiondto.TargetUserId} NÃO EXISTE");
+
             if (sourceUser.Account.Balance < transactiondto.Value)
-            {
-                throw new Exception("Account without balance to make a transaction");
-            }
+                return BadRequest("Você não tem saldo");
 
             var transaction = new Transaction
             {
@@ -77,7 +87,6 @@ namespace JorgeCred.API.Controllers
     public class TransactionDTO
     {
         public string TargetUserId { get; set; }
-        public string TargetSourceId { get; set; }
         public decimal Value { get; set; }
     }
 }

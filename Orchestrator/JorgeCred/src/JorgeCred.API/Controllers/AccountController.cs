@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JorgeCred.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase

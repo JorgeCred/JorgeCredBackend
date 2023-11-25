@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 namespace JorgeCred.API.Extensions
@@ -46,6 +47,8 @@ namespace JorgeCred.API.Extensions
                 ValidateLifetime = true,
 
                 ClockSkew = TimeSpan.Zero,
+
+                RoleClaimType = ClaimTypes.Role
             };
 
             services.AddAuthentication(options =>

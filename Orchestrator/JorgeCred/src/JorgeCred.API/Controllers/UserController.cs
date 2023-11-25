@@ -22,6 +22,7 @@ namespace JorgeCred.API.Controllers
         }
 
         [HttpPost("Register")]
+        
         public async Task<IActionResult> Register(RegisterUserRequest registerUserRequest)
         {
             if (!ModelState.IsValid)
@@ -50,7 +51,6 @@ namespace JorgeCred.API.Controllers
             return Ok(result);
         }
 
-        [Authorize]
         [HttpGet("ListUsers")]
         public async Task<IActionResult> ListUsers()
         {
@@ -67,14 +67,13 @@ namespace JorgeCred.API.Controllers
             return Ok(users);
         }
 
-        [Authorize]
-        [HttpGet("GetUser/{userId}")]
-        public async Task<IActionResult> GetUser(string userId)
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetUser()
         {
           var user = await UserManager
                 .Users
                 .Include(x => x.Account)
-                .FirstOrDefaultAsync(x => x.Id == userId);
+                .FirstOrDefaultAsync(x => x.Id == _identityService.GetUserIdFromToken(Request));
 
           user.Account.ApplicationUser = null;
 
