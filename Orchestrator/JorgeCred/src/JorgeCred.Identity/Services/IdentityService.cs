@@ -170,6 +170,30 @@ namespace JorgeCred.Identity.Services
             return (validatedToken is JwtSecurityToken jwtSecurityToken) &&
                    jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
         }
+
+        public async Task<bool> UpdatePassword(HttpRequest req, string newPassword) 
+    {
+
+        var id = GetUserIdFromToken(req);
+
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+            {
+            // Handle the case when the user is not found
+            return false;
+            }
+
+        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+        var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+
+        if (!result.Succeeded) {
+            var err = result.Errors.FirstOrDefault().Description;
+
+            throw new Exception(err);
+        }
+
+        return result.Succeeded;
     }
+        }
 
 }
