@@ -82,8 +82,7 @@ export class DashboardComponent {
               headers: {
                 'Content-Type': 'application/json',
               },
-            })
-          console.log('Ok')
+            }).subscribe(() => console.log('Ok'))
         })
       })
     })
