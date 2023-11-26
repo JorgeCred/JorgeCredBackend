@@ -10,6 +10,10 @@ const jorgeCredIconUrl = config.jorgeCredIconUrl
 
 webPush.setVapidDetails('mailto:test@test.com', publicVapidKey, privateVapidKey)
 
+/**
+ * Recebe o conteudo e endereço da notificação e envia para o browser
+ * @param message json que possui as chaves endpoint, keys, title e body
+ */
 function pushNotification(message) {
     const requestBody = JSON.parse(message.content)
 
@@ -33,6 +37,9 @@ function pushNotification(message) {
         .catch((err) => console.error(err))
 }
 
+/**
+ * Leitura a fila e envia notificações ao receber
+ */
 ;(async () => {
     try {
         const connection = await amqp.connect(amqp_conn)
