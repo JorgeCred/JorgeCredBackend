@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule, FormControl, Validators } from '@angu
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register-component',
@@ -18,7 +18,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 })
 export class RegisterComponentComponent {
 
-  constructor(private httpClient: HttpClient, private router: Router, private _snackBar: MatSnackBar, private _dialog: MatDialog) {
+  constructor(private httpClient: HttpClient, private router: Router, private _snackBar: MatSnackBar, private _dialog: MatDialog, public dialogRef: MatDialogRef<RegisterComponentComponent>) {
   }
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
@@ -51,12 +51,15 @@ export class RegisterComponentComponent {
       passwordConfirmation: this.passwordFormControl.value,
       rolename: 'jorginho',
     }, { responseType: 'text' }).subscribe({
-      next: x => console.log(x),
+      next: x => {
+        this.dialogRef.close()
+      },
       error: err => {
         // Handle registration error and show appropriate message
         this.openSnackBar('Error during registration');
       }
     });
+
   }
 
   openSnackBar(message: string) {
