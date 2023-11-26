@@ -7,18 +7,20 @@ import {MatInputModule} from '@angular/material/input';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Router, RouterModule} from '@angular/router';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { RegisterComponentComponent } from '../../register-component/register-component.component';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatInputModule, ReactiveFormsModule, FormsModule, HttpClientModule, RouterModule, MatSnackBarModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatInputModule, ReactiveFormsModule, FormsModule, HttpClientModule, RouterModule, MatSnackBarModule,MatDialogModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
-  constructor(private httpClient: HttpClient, private router: Router, private _snackBar: MatSnackBar) {
+  constructor(private httpClient: HttpClient, private router: Router, private _snackBar: MatSnackBar, private _dialog: MatDialog) {
   }
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
@@ -59,6 +61,10 @@ export class LoginComponent {
         })
       }
     })
+  }
+
+  cadastrarFn(){
+    this._dialog.open(RegisterComponentComponent)
   }
 
   urlBase64ToUint8Array(base64String: string) {
