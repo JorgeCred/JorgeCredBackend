@@ -55,26 +55,41 @@
   @if (TRANSACOES_DO_INDIVIDUO.length > 0) {
     <div class="table-container">
       <mat-tab-group>
-        <mat-tab label="Transações Efetuadas"> <table mat-table [dataSource]="TRANSACOES_DO_INDIVIDUO" class="mat-elevation-z2 tabelo">
-  
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef>Afetado</th>
-            <td mat-cell *matCellDef="let element"> {{element.targetAccount.applicationUserId}} </td>
-          </ng-container>
+            <mat-tab label="Transações Efetuadas"> 
+                <table mat-table [dataSource]="TRANSACOES_DO_INDIVIDUO" class="mat-elevation-z2 tabelo">
         
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Valor </th>
-            <td mat-cell *matCellDef="let element"> R$ {{element.value}} </td>
-          </ng-container>
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef>Afetado</th>
+                  <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Valor </th>
+                  <td mat-cell *matCellDef="let element"> R$ {{element.value}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+          </mat-tab>
+        <mat-tab label="Transações Recebidas">
+          <table mat-table [dataSource]="TRANSACOES_RECEBIDAS" class="mat-elevation-z2 tabelo">
         
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table></mat-tab>
-        <mat-tab label="Transações Recebidas"> Content 2 </mat-tab>
-        <mat-tab label="Meu Cartão"> Content 3 </mat-tab>
-      </mat-tab-group>
-      
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>Afetado</th>
+              <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Valor </th>
+              <td mat-cell *matCellDef="let element"> R$ {{element.value}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>  
+        </mat-tab>
+      </mat-tab-group>  
     </div>
   }
-
 </div>

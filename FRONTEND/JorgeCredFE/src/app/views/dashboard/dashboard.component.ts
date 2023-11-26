@@ -14,6 +14,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {Dialog, DialogModule} from '@angular/cdk/dialog'; 
 import { ChangePasswordComponent } from '../../change-password/change-password.component';
 import { Router, RouterModule } from '@angular/router';
+import { NgPaymentCardModule } from 'ng-payment-card';
 
 export interface PeriodicElement {
   name: string;
@@ -36,8 +37,7 @@ export interface PeriodicElement {
     ReactiveFormsModule,
     MatTabsModule,
     RouterModule,
-    DialogModule
-  ],
+    DialogModule  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
@@ -52,13 +52,17 @@ export class DashboardComponent {
   meu_saldo = 0;
 
   TRANSACOES_DO_INDIVIDUO: any = []
+  TRANSACOES_RECEBIDAS = [];
   INFORMACOES_DA_CONTA_DO_CARA: any = null;
 
   constructor(private httpClient: HttpClient, private snackBar: MatSnackBar, private router: Router, private dialog: Dialog) {}
 
   ngOnInit() {
-    this.httpClient.get("https://localhost:7027/api/Transaction/ListTransactions")
+    this.httpClient.get("https://localhost:7027/api/Transaction/ListMyTransactions")
       .subscribe(transacoes => this.TRANSACOES_DO_INDIVIDUO = transacoes as any)
+
+    this.httpClient.get("https://localhost:7027/api/Transaction/ListReceivedTransactions")
+      .subscribe(transacoes => this.TRANSACOES_RECEBIDAS = transacoes as any)
 
 
     this.httpClient.get("https://localhost:7027/api/User/GetUser").subscribe(x => this.meu_saldo = (x as any).account.balance)

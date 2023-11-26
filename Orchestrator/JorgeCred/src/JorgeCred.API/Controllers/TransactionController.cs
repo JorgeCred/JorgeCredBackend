@@ -1,4 +1,5 @@
-﻿using JorgeCred.Data.Context;
+﻿using JorgeCred.Application.Dtos.Response;
+using JorgeCred.Data.Context;
 using JorgeCred.Domain;
 using JorgeCred.Identity.Data;
 using JorgeCred.Identity.Services;
@@ -33,15 +34,17 @@ namespace JorgeCred.API.Controllers
             _bus = bus;
         }
 
-        [HttpGet("ListTransactions")]
+        [HttpGet("ListMyTransactions")]
         public async Task<IActionResult> ListTransactions()
         {
             var userId = IdentityService.GetUserIdFromToken(Request);
 
             var query = await Transactions
-                .Include(x => x.TargetAccount)
-                .Include(x => x.OriginAccount)
                 .Where(x => x.OriginAccount.ApplicationUserId == userId)
+                .Include(x => x.TargetAccount)
+                    .ThenInclude(x=>x.ApplicationUser)
+                .Include(x => x.OriginAccount)
+                    .ThenInclude(x=>x.ApplicationUser)
                 .ToListAsync();
 
             foreach (var transaction in query)
@@ -50,7 +53,35 @@ namespace JorgeCred.API.Controllers
                 transaction.OriginAccount.Transactions = null;
             }
 
-            return Ok(query);
+            return Ok(query.Select(x=>new TransactionsDTO{
+                UserName = x.TargetAccount.ApplicationUser.UserName,
+                Value = x.Value
+            }));
+        }
+
+        [HttpGet("ListReceivedTransactions")]
+        public async Task<IActionResult> ListReceivedTransactions()
+        {
+            var userId = IdentityService.GetUserIdFromToken(Request);
+
+            var query = await Transactions
+                .Where(x => x.TargetAccount.ApplicationUserId == userId)
+                .Include(x => x.TargetAccount)
+                    .ThenInclude(x=>x.ApplicationUser)
+                .Include(x => x.OriginAccount)
+                    .ThenInclude(x=>x.ApplicationUser)
+                .ToListAsync();
+
+            foreach (var transaction in query)
+            {
+                transaction.TargetAccount.Transactions = null;
+                transaction.OriginAccount.Transactions = null;
+            }
+
+            return Ok(query.Select(x=>new TransactionsDTO{
+                UserName = x.TargetAccount.ApplicationUser.UserName,
+                Value = x.Value
+            }));
         }
 
         [HttpPost("Transact")]
