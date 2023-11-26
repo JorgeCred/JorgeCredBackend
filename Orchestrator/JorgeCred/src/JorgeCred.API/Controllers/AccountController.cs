@@ -1,10 +1,14 @@
-﻿using JorgeCred.Data.Context;
+﻿using JorgeCred.Application.Dtos.Request;
+using JorgeCred.Data.Context;
 using JorgeCred.Domain;
+using JorgeCred.Identity.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System;
 
 namespace JorgeCred.API.Controllers
 {
@@ -12,12 +16,14 @@ namespace JorgeCred.API.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        public IdentityService _identityService { get; set; }
         private readonly JorgeContext Context;
         private readonly DbSet<Account> Account;
         private readonly UserManager<ApplicationUser> UserManager;
 
-        public AccountController(JorgeContext context, UserManager<ApplicationUser> userManager)
+        public AccountController(IdentityService identityService, JorgeContext context, UserManager<ApplicationUser> userManager)
         {
+            _identityService = identityService;
             Context = context;
             Account = Context.Set<Account>();
             UserManager = userManager;
@@ -44,5 +50,19 @@ namespace JorgeCred.API.Controllers
 
             return Ok();
         }
+
+        [HttpPost("AssociateTokenWithUser")]
+        public async Task<IActionResult> AssociateTokenWithUser([FromBody] PushNotificationRequest pushNotification) {
+            var userRef = await UserManager
+                .Users
+                .FirstOrDefaultAsync(x => x.Id == _identityService.GetUserIdFromToken(Request));
+
+            userRef.PushNotificationAddress = JsonConvert.SerializeObject(pushNotification);
+
+            await UserManager.UpdateAsync(userRef);
+
+            return Ok();
+        }
+
     }
 }
