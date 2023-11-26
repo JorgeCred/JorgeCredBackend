@@ -32,10 +32,48 @@ namespace JorgeCred.API.Controllers
 
             var result = await _identityService.RegisterUser(registerUserRequest);
 
+            var userRef = await UserManager.Users.FirstOrDefaultAsync(x=>x.UserName == registerUserRequest.Email);
+
+            var newAccount = new Account
+            {
+                Balance = 100,
+                CardNumber = Guid.NewGuid(),
+                CardValidity = DateTime.UtcNow.AddYears(2),
+                CardSecurityStamp = Guid.NewGuid().ToString(),
+                Transactions = new List<Transaction> { },
+                ApplicationUser = userRef!
+            };
+
+            userRef.Account = newAccount;
+            await UserManager.UpdateAsync(userRef);
+
+
             if (result)
                 return Ok("Usuario criado com sucesso!");
 
             return BadRequest("Algo deu errado....");
+        }
+
+        [HttpPost("CreateAccount/{userId}")]
+        public async Task<IActionResult> CreateAccount(string userId)
+        {
+            var userRef = await UserManager.FindByIdAsync(userId);
+
+            var newAccount = new Account
+            {
+                Balance = 100,
+                CardNumber = Guid.NewGuid(),
+                CardValidity = DateTime.UtcNow.AddYears(2),
+                CardSecurityStamp = Guid.NewGuid().ToString(),
+                Transactions = new List<Transaction> { },
+                ApplicationUser = userRef!
+            };
+
+            userRef.Account = newAccount;
+
+            await UserManager.UpdateAsync(userRef);
+
+            return Ok();
         }
 
         [HttpPost("Login")]
