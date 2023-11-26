@@ -10,7 +10,9 @@ import {MatTableModule} from '@angular/material/table';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatTabsModule} from '@angular/material/tabs';
+import {Dialog, DialogModule} from '@angular/cdk/dialog'; 
+import { ChangePasswordComponent } from '../../change-password/change-password.component';
 
 export interface PeriodicElement {
   name: string;
@@ -31,7 +33,8 @@ export interface PeriodicElement {
     MatTableModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    DialogModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
@@ -49,7 +52,7 @@ export class DashboardComponent {
   TRANSACOES_DO_INDIVIDUO: any = []
   INFORMACOES_DA_CONTA_DO_CARA: any = null;
 
-  constructor(private httpClient: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(private httpClient: HttpClient, private snackBar: MatSnackBar, private dialog: Dialog) {}
 
   ngOnInit() {
     this.httpClient.get("https://localhost:7027/api/Transaction/ListTransactions")
@@ -74,5 +77,9 @@ export class DashboardComponent {
         this.snackBar.open(x.error, 'x')
       }
     })
+  }
+
+  minhafuncao() {
+    this.dialog.open(ChangePasswordComponent);
   }
 }

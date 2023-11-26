@@ -81,5 +81,16 @@ namespace JorgeCred.API.Controllers
 
          return Ok(user);
         }
+
+        [HttpPost("UpdateUserPassword")]
+        public async Task<IActionResult> UpdateUserPassword([FromBody] changePasswordDTO newPassword) 
+        {
+            var user = await _identityService.UpdatePassword(Request, newPassword.NewPassword);
+            return Ok(user);
+        }
+    }
+
+    public class changePasswordDTO {
+        public string NewPassword { get; set; }
     }
 }
