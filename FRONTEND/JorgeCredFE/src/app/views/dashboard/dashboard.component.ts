@@ -55,6 +55,8 @@ export class DashboardComponent {
   TRANSACOES_RECEBIDAS = [];
   INFORMACOES_DA_CONTA_DO_CARA: any = null;
 
+  username = 'Jorge'
+
   constructor(private httpClient: HttpClient, private snackBar: MatSnackBar, private router: Router, private dialog: Dialog) {
   }
 
@@ -94,7 +96,10 @@ export class DashboardComponent {
       .subscribe(transacoes => this.TRANSACOES_RECEBIDAS = transacoes as any)
 
 
-    this.httpClient.get('https://localhost:7027/api/User/GetUser').subscribe(x => this.meu_saldo = (x as any).account.balance)
+    this.httpClient.get('https://localhost:7027/api/User/GetUser').subscribe(x => {
+      this.meu_saldo = (x as any).account.balance;
+      this.username = (x as any).userName
+    })
 
     if (localStorage.getItem('token') == undefined) {
       this.router.navigate(['/'])
@@ -103,14 +108,16 @@ export class DashboardComponent {
 
   fazerTransacao() {
     this.httpClient.post('https://localhost:7027/api/Transaction/Transact', {
-      'targetUserId': this.id_do_outro_mano_p_transacionar.value,
+      'targetUserEmail': this.id_do_outro_mano_p_transacionar.value?.trim(),
       'value': this.valor_da_transacao.value,
     }).subscribe({
       next: () => {
-        this.httpClient.get('https://localhost:7027/api/Transaction/ListTransactions')
+        this.httpClient.get('https://localhost:7027/api/Transaction/ListMyTransactions')
           .subscribe(transacoes => this.TRANSACOES_DO_INDIVIDUO = transacoes as any)
 
         this.httpClient.get('https://localhost:7027/api/User/GetUser').subscribe(x => this.meu_saldo = (x as any).account.balance)
+
+        this.snackBar.open('Transação concluida com sucesso!', 'x')
       },
       error: (x) => {
         this.snackBar.open(x.error, 'x')
