@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {Dialog, DialogModule} from '@angular/cdk/dialog'; 
 import { ChangePasswordComponent } from '../../change-password/change-password.component';
+import { Router, RouterModule } from '@angular/router';
 
 export interface PeriodicElement {
   name: string;
@@ -34,6 +35,7 @@ export interface PeriodicElement {
     MatInputModule,
     ReactiveFormsModule,
     MatTabsModule,
+    RouterModule,
     DialogModule
   ],
   templateUrl: './dashboard.component.html',
@@ -52,7 +54,7 @@ export class DashboardComponent {
   TRANSACOES_DO_INDIVIDUO: any = []
   INFORMACOES_DA_CONTA_DO_CARA: any = null;
 
-  constructor(private httpClient: HttpClient, private snackBar: MatSnackBar, private dialog: Dialog) {}
+  constructor(private httpClient: HttpClient, private snackBar: MatSnackBar, private router: Router, private dialog: Dialog) {}
 
   ngOnInit() {
     this.httpClient.get("https://localhost:7027/api/Transaction/ListTransactions")
@@ -60,6 +62,10 @@ export class DashboardComponent {
 
 
     this.httpClient.get("https://localhost:7027/api/User/GetUser").subscribe(x => this.meu_saldo = (x as any).account.balance)
+
+    if (localStorage.getItem('token') == undefined){
+      this.router.navigate(['/'])
+    }
   }
 
   fazerTransacao() {
@@ -77,6 +83,11 @@ export class DashboardComponent {
         this.snackBar.open(x.error, 'x')
       }
     })
+  }
+
+  logoutFn() {
+    localStorage.removeItem('token')
+    this.router.navigate(['/'])
   }
 
   minhafuncao() {

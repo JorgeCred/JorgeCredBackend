@@ -2,6 +2,7 @@
 using JorgeCred.Domain;
 using JorgeCred.Identity.Data;
 using JorgeCred.Identity.Services;
+using MassTransit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,19 @@ namespace JorgeCred.API.IoC
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IdentityService>();
+
+            services.AddMassTransit(x =>
+            {
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host("rabbitmq://chimpanzee.rmq.cloudamqp.com/fzrrkjya", h =>
+                    {
+                        h.Username("fzrrkjya");
+                        h.Password("4hKfmc3shjyOXU4Jr_ptSem0hh5LfP-0");
+                    });
+                });
+            });
+
         }
     }
 }

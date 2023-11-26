@@ -1,0 +1,37 @@
+<div class="my-component-class">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Jorginho</mat-card-title>
+        <mat-card-subtitle>Porfavor, faça login no banco!</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+  
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+            @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+            }
+            @if (emailFormControl.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput [formControl]="passwordFormControl">
+            @if (passwordFormControl.hasError('required')) {
+            <mat-error>Password is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </form>
+  
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="cadastrarFn()">Cadastrar</button>
+    </mat-card-actions>
+    </mat-card>
+  </div>
+  
