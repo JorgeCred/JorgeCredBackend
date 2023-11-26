@@ -1,5 +1,6 @@
 using JorgeCred.API.Extensions;
 using JorgeCred.API.IoC;
+using MassTransit;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 
@@ -62,6 +63,7 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 
 app.UseCors("AllowAll");
 app.UseSwagger();

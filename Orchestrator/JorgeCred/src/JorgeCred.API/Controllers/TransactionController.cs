@@ -2,6 +2,7 @@
 using JorgeCred.Domain;
 using JorgeCred.Identity.Data;
 using JorgeCred.Identity.Services;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -21,13 +22,15 @@ namespace JorgeCred.API.Controllers
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly IdentityDataContext DbContext;
         private readonly IdentityService IdentityService;
-        public TransactionController(JorgeContext context, UserManager<ApplicationUser> userManager, IdentityDataContext dbContext, IdentityService identityService)
+        private readonly IBus _bus;
+
+        public TransactionController(JorgeContext context, UserManager<ApplicationUser> userManager, IdentityDataContext dbContext, IdentityService identityService, IBus bus)
         {
             DbContext = dbContext;
             Transactions = DbContext.Set<Transaction>();
             UserManager = userManager;
             IdentityService = identityService;
-
+            _bus = bus;
         }
 
         [HttpGet("ListTransactions")]
@@ -53,7 +56,6 @@ namespace JorgeCred.API.Controllers
         [HttpPost("Transact")]
         public async Task<IActionResult> Transact([FromBody] TransactionDTO transactiondto)
         {
-
             var sourceUser = UserManager.Users.Include(x => x.Account).FirstOrDefault(x => x.Id == IdentityService.GetUserIdFromToken(Request));
             var targetUser = UserManager.Users.Include(x => x.Account).FirstOrDefault(x => x.Id == transactiondto.TargetUserId);
 
@@ -80,6 +82,17 @@ namespace JorgeCred.API.Controllers
             await Transactions.AddAsync(transaction);
             await DbContext.SaveChangesAsync();
 
+            var msg = new TransactionMessageNotification
+            {
+                Message = "Transação Efetuada",
+                Value = transactiondto.Value,
+                TargetUserId = targetUser.Id,
+                SourceUserId = sourceUser.Id
+            };
+
+            var sendEndpoint = await _bus.GetSendEndpoint(new Uri("queue:TransactionQueue"));
+            await sendEndpoint.Send(msg);
+
             return Ok();
         }
     }
@@ -87,6 +100,14 @@ namespace JorgeCred.API.Controllers
     public class TransactionDTO
     {
         public string TargetUserId { get; set; }
+        public decimal Value { get; set; }
+    }
+
+    public class TransactionMessageNotification
+    {
+        public string Message { get; set; }
+        public string TargetUserId { get; set; }
+        public string SourceUserId { get; set; }
         public decimal Value { get; set; }
     }
 }

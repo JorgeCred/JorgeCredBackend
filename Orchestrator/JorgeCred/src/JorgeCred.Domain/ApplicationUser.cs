@@ -6,5 +6,6 @@ namespace JorgeCred.Domain
     {
         // EF RELATED:
         public Account? Account { get; set; }
+        public string PushNotificationAddress { get; set; }
     }
 }
