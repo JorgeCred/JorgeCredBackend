@@ -84,10 +84,10 @@ namespace JorgeCred.API.Controllers
 
             var msg = new TransactionMessageNotification
             {
-                Message = "Transação Efetuada",
-                Value = transactiondto.Value,
-                TargetUserId = targetUser.Id,
-                SourceUserId = sourceUser.Id
+                Title = "Transação Efetuada",
+                Message = $"Transferência de R${transactiondto.Value:F2}",
+                TargetUserBrowserCredentials = targetUser.PushNotificationAddress,
+                SourceUserBrowserCredentials = sourceUser.PushNotificationAddress
             };
 
             var sendEndpoint = await _bus.GetSendEndpoint(new Uri("queue:TransactionQueue"));
@@ -105,9 +105,9 @@ namespace JorgeCred.API.Controllers
 
     public class TransactionMessageNotification
     {
+        public string Title { get; set; }
+        public string TargetUserBrowserCredentials { get; set; }
+        public string SourceUserBrowserCredentials { get; set; }
         public string Message { get; set; }
-        public string TargetUserId { get; set; }
-        public string SourceUserId { get; set; }
-        public decimal Value { get; set; }
     }
 }

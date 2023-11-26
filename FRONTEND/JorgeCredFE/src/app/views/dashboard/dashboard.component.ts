@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatListModule } from '@angular/material/list';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
-import {MatTableModule} from '@angular/material/table'; 
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {MatTabsModule} from '@angular/material/tabs'; 
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTableModule} from '@angular/material/table';
+import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 
 export interface PeriodicElement {
   name: string;
@@ -38,7 +38,7 @@ export interface PeriodicElement {
 })
 export class DashboardComponent {
   displayedColumns: string[] = ['position', 'name'];
-  dataSource =null ;
+  dataSource = null;
 
   valor_da_transacao = new FormControl(10, [Validators.required]);
   id_do_outro_mano_p_transacionar = new FormControl('10', [Validators.required]);
@@ -49,9 +49,39 @@ export class DashboardComponent {
   TRANSACOES_DO_INDIVIDUO: any = []
   INFORMACOES_DA_CONTA_DO_CARA: any = null;
 
-  constructor(private httpClient: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(private httpClient: HttpClient, private snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
+
+    console.log('Registering Service Worker...')
+
+    navigator.serviceWorker.register('/worker.js', {
+      scope: '/',
+    }).then(register => {
+      console.log('Service Worker Registered.')
+
+      navigator.serviceWorker.ready.then(() => {
+        // Subscribe user push
+        console.log('Registering Push...')
+        register.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: this.urlBase64ToUint8Array('BFDwNfKXH6NL-_QDNZ_qj6lqSBZde5PrPOtzwkw88kfphd6g-q3zntVUbhsNvbC50IZKK7Rw7qv9vGoYTfL4IW8'),
+        }).then(subscription => {
+          let payload = subscription.toJSON()
+          console.log(payload)
+          this.httpClient.post("https://localhost:7027/api/Account/AssociateTokenWithUser",
+            JSON.stringify(payload),
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
+          console.log("Ok")
+        })
+      })
+    })
+
     this.httpClient.get("https://localhost:7027/api/Transaction/ListTransactions")
       .subscribe(transacoes => this.TRANSACOES_DO_INDIVIDUO = transacoes as any)
 
@@ -68,11 +98,27 @@ export class DashboardComponent {
         this.httpClient.get("https://localhost:7027/api/Transaction/ListTransactions")
           .subscribe(transacoes => this.TRANSACOES_DO_INDIVIDUO = transacoes as any)
 
-          this.httpClient.get("https://localhost:7027/api/User/GetUser").subscribe(x => this.meu_saldo = (x as any).account.balance)
+        this.httpClient.get("https://localhost:7027/api/User/GetUser").subscribe(x => this.meu_saldo = (x as any).account.balance)
       },
       error: (x) => {
         this.snackBar.open(x.error, 'x')
       }
     })
+  }
+
+
+  urlBase64ToUint8Array(base64String: string) {
+    const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
+    const base64 = (base64String + padding)
+      .replace(/\-/g, '+')
+      .replace(/_/g, '/')
+
+    const rawData = window.atob(base64)
+    const outputArray = new Uint8Array(rawData.length)
+
+    for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i)
+    }
+    return outputArray
   }
 }

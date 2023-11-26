@@ -29,29 +29,9 @@ export class LoginComponent {
       Username: this.emailFormControl.value,
       Password: this.passwordFormControl.value
     }, {responseType: 'text'}).subscribe({
-      next: x => {
+      next: token => {
         this.router.navigate(['/dashboard'])
-        localStorage.setItem('token', x)
-
-        console.log('Registering Service Worker...')
-
-        navigator.serviceWorker.register('/worker.js', {
-          scope: '/',
-        }).then(register => {
-          console.log('Service Worker Registered.')
-
-          navigator.serviceWorker.ready.then(() => {
-            // Subscribe user push
-            console.log('Registering Push...')
-            register.pushManager.subscribe({
-              userVisibleOnly: true,
-              applicationServerKey: this.urlBase64ToUint8Array('BBa8uidwHniYRXzy0Wsaz3Ne7MjuU9ghqvxrz92jxA_eFOskU6EEwTigU3ySJterCgZuW-ohp3TXrI3A-miBcNg'),
-            }).then(subscription => {
-              let payload = subscription.toJSON()
-              console.log(payload)
-            })
-          })
-        })
+        localStorage.setItem('token', token)
       },
       error: x => {
         this._snackBar.open('Deu pobrema', 'x', {
@@ -60,20 +40,4 @@ export class LoginComponent {
       }
     })
   }
-
-  urlBase64ToUint8Array(base64String: string) {
-    const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
-    const base64 = (base64String + padding)
-      .replace(/\-/g, '+')
-      .replace(/_/g, '/')
-
-    const rawData = window.atob(base64)
-    const outputArray = new Uint8Array(rawData.length)
-
-    for (let i = 0; i < rawData.length; ++i) {
-      outputArray[i] = rawData.charCodeAt(i)
-    }
-    return outputArray
-  }
-
 }
