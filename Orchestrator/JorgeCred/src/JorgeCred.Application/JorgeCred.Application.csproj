@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dtos\Request\LoginRequest - Cópia.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Rabbit\" />
   </ItemGroup>
 

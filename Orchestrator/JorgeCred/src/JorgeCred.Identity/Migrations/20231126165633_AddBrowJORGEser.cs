@@ -15,7 +15,7 @@ namespace JorgeCred.Identity.Migrations
                 name: "PushNotificationAddress",
                 table: "AspNetUsers",
                 type: "text",
-                nullable: false,
+                nullable: true,
                 defaultValue: "");
         }
 
