@@ -88,10 +88,10 @@ namespace JorgeCred.API.Controllers
         public async Task<IActionResult> Transact([FromBody] TransactionDTO transactiondto)
         {
             var sourceUser = UserManager.Users.Include(x => x.Account).FirstOrDefault(x => x.Id == IdentityService.GetUserIdFromToken(Request));
-            var targetUser = UserManager.Users.Include(x => x.Account).FirstOrDefault(x => x.Id == transactiondto.TargetUserId);
+            var targetUser = UserManager.Users.Include(x => x.Account).FirstOrDefault(x => x.Email == transactiondto.TargetUserEmail);
 
             if (targetUser == null || sourceUser == null)
-                return BadRequest($"O usuario de id: {transactiondto.TargetUserId} NÃO EXISTE");
+                return BadRequest($"O usuario de email: {transactiondto.TargetUserEmail} NÃO EXISTE");
 
             if (sourceUser.Account.Balance < transactiondto.Value)
                 return BadRequest("Você não tem saldo");
@@ -130,7 +130,7 @@ namespace JorgeCred.API.Controllers
 
     public class TransactionDTO
     {
-        public string TargetUserId { get; set; }
+        public string TargetUserEmail { get; set; }
         public decimal Value { get; set; }
     }
 
