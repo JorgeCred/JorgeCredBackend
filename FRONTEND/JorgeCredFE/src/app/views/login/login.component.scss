@@ -63,3 +63,8 @@
   background-color: #317956;
   color: white;
 }
+
+.mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  color: #317956 !important;
+  background-color: #317956 !important;
+}

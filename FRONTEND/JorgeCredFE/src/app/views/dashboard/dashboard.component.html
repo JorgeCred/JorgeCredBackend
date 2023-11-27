@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="bar">
   <span>JorgeCred</span>
   <span class="example-spacer"></span>
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with cogwheel icon" (click)="minhafuncao()">
@@ -38,11 +38,10 @@
       </form>
     </mat-card-content>
     <mat-card-actions class="jorge">
-      <button mat-raised-button color="primary" (click)="fazerTransacao()">Transacionar</button>
+      <button id="botaocaos" mat-raised-button color="primary" (click)="fazerTransacao()">Transacionar</button>
     </mat-card-actions>
   </mat-card>
 
-  @if (TRANSACOES_DO_INDIVIDUO.length > 0) {
     <div class="table-container">
       <mat-tab-group>
             <mat-tab label="Transações Efetuadas"> 
@@ -81,5 +80,4 @@
         </mat-tab>
       </mat-tab-group>  
     </div>
-  }
 </div>
