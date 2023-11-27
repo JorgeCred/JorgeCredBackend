@@ -1,5 +1,5 @@
 .my-component-class {
-  background-image: url('/assets/ismaeu.jpg');
+  background-image: url('/assets/banner.png');
   background-size: cover; // Isso garante que a imagem cubra todo o componente
   background-position: center; // Isso centraliza a imagem no componente
   background-repeat: no-repeat; // Isso impede que a imagem se repita
@@ -27,4 +27,39 @@
 
 .example-full-width {
   width: 100%;
+}
+
+.my-component-class {
+  justify-content: flex-start;
+}
+
+@keyframes slideRightToLeft {
+  from {
+      transform: translateX(100%); /* Start off-screen or at the right edge */
+  }
+  to {
+      transform: translateX(0); /* End at the original position */
+  }
+}
+
+.my-component-class .example-card {
+  background-color: rgba($color: #428A67, $alpha: 0.7);
+  margin-left: 25px;
+  color: white;
+  animation: slideRightToLeft 2s ease-in-out forwards;
+
+}
+
+.mat-mdc-card-subtitle {
+  color: white;
+}
+
+.mdc-button .mat-mdc-button-ripple {
+  color: white;
+}
+
+
+.bar {
+  background-color: #317956;
+  color: white;
 }

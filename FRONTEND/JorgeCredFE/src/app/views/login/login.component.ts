@@ -9,12 +9,14 @@ import {Router, RouterModule} from '@angular/router';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { RegisterComponentComponent } from '../../register-component/register-component.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatInputModule, ReactiveFormsModule, FormsModule, HttpClientModule, RouterModule, MatSnackBarModule,MatDialogModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatInputModule, ReactiveFormsModule, FormsModule, HttpClientModule, RouterModule, MatSnackBarModule,MatDialogModule, MatIconModule, MatToolbarModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

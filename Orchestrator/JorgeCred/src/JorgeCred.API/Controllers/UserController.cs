@@ -77,7 +77,9 @@ namespace JorgeCred.API.Controllers
                     .ThenInclude(x => x.Transactions)
                 .FirstOrDefaultAsync(x => x.Id == _identityService.GetUserIdFromToken(Request));
 
-          user.Account.ApplicationUser = null;
+
+          if (user.Account != null)
+                user.Account.ApplicationUser = null;
 
          return Ok(user);
         }
