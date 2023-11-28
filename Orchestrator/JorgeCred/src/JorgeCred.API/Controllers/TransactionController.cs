@@ -34,6 +34,11 @@ namespace JorgeCred.API.Controllers
             _bus = bus;
         }
 
+        /// Método: GET
+        /// Rota: api/Transaction/ListMyTransactions
+        /// Parametros URI: Nenhum
+        /// Parametros JSON: Nenhum
+        /// Retorna a lista de transações realizadas pelo usuário logado.
         [HttpGet("ListMyTransactions")]
         public async Task<IActionResult> ListTransactions()
         {
@@ -59,6 +64,11 @@ namespace JorgeCred.API.Controllers
             }));
         }
 
+        /// Método: GET
+        /// Rota: api/Transaction/ListReceivedTransactions
+        /// Parametros URI: Nenhum
+        /// Parametros JSON: Nenhum
+        /// Retorna a lista de transações recebidas pelo usuário logado.
         [HttpGet("ListReceivedTransactions")]
         public async Task<IActionResult> ListReceivedTransactions()
         {
@@ -84,6 +94,13 @@ namespace JorgeCred.API.Controllers
             }));
         }
 
+        /// Método: POST
+        /// Rota: api/Transaction/Transact
+        /// Parametros URI: Nenhum
+        /// Parametros JSON:
+        ///     "TargetUserEmail": "string"
+        ///     "Value": "decimal"
+        /// Essa função realiza uma transação entre contas, debitando o valor da conta do usuário logado para a conta do usuário alvo. Notifica os usuários envolvidos por meio de uma mensagem usando mensageria.
         [HttpPost("Transact")]
         public async Task<IActionResult> Transact([FromBody] TransactionDTO transactiondto)
         {
