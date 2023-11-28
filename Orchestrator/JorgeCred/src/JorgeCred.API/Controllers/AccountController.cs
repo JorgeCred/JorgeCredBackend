@@ -29,6 +29,11 @@ namespace JorgeCred.API.Controllers
             UserManager = userManager;
         }
 
+        /// Método: POST
+        /// Rota: api/Account/CreateAccount/{userId}
+        /// Parametros URI: "userId"
+        /// Parametros JSON: Nenhum
+        /// Cria uma nova conta com o userId fornecido. Inicializa a conta com um saldo de 100, um número de cartão único, validade de 2 anos e um código de segurança único.
         [HttpPost("CreateAccount/{userId}")]
         public async Task<IActionResult> CreateAccount(string userId)
         {
@@ -51,6 +56,17 @@ namespace JorgeCred.API.Controllers
             return Ok();
         }
 
+        /// Método: POST
+        /// Rota: api/Account/AssociateTokenWithUser
+        /// Parametros URI: Nenhum
+        /// Parametros JSON:
+        ///     "endpoint": "string"
+        ///     "keys": {
+        ///         "auth": "string"
+        ///         "expirationTime": "string"
+        ///         "p256dh": "string"
+        ///     }
+        /// Associa um token de notificação push ao usuário autenticado. O token é recebido no corpo da requisição como um objeto JSON. Este token é usado para enviar notificações push para o usuário.
         [HttpPost("AssociateTokenWithUser")]
         public async Task<IActionResult> AssociateTokenWithUser([FromBody] PushNotificationRequest pushNotification) {
             var userRef = await UserManager
