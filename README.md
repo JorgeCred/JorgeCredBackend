@@ -1,25 +1,34 @@
-# Jorge Cred - A banking Application
-- Summary:
-  - Architecture description;
-  - Folder tree;
-  - Architecture diagram;
+## Como rodar o código?
 
-## Architecture Description:
-  - **Orchestrator**: Responsible for managing the HTTP interactions with the GraphQL server;
-  - **Statistics**: Delivers insights about the users using the application;
-  - **Transaction**: Manages the transactions in the system;
-  - **Notifier**: Notifies everything that happens in the user (mainly transactions);
- 
-## Folder tree:
-```
-.
-└── JorgeCredManager/
-    ├── Orchestrator (Made with C#, Gustavo R. Pereira responsability)
-    ├── StatisticsManager (Made with ??, Luan R. Boschini)
-    ├── TransactionManager (Made with Golang, Igor Zimmer)
-    └── NotificationManager (Made with JavaScript, Caio B. Pinho)
-```
- 
-## Architecture Diagram:
+### Frontend
+Em um novo terminal, digite:
+> cd .\src\  
+cd .\JorgeCredBackend\  
+cd .\FRONTEND\  
+cd .\JorgeCredFE\  
 
-![alt text](https://github.com/JorgeCred/JorgeCredBackend/blob/main/JorgeCredArchitecture.png)
+Na pasta JorgeCredFE, se for sua **primeira vez** rodando o projeto, digite:
+> npm install  
+npm start
+
+Se **não** for sua primeira vez rodando o projeto, digite:
+> npm start
+
+Vá até o http://localhost:4200/ em seu navegador de preferência.
+
+### Backend
+Em um outro terminal, digite:
+> cd .\src\
+cd .\JorgeCredBackend\  
+cd .\Orchestrator\  
+cd .\JorgeCred\  
+cd .\src\  
+cd .\JorgeCred.API\  
+dotnet run
+
+Em outro terminal, digite:
+> cd .\src\
+cd .\JorgeCredBackend\  
+cd .\NotificationManager\  
+npm install  
+npm run
