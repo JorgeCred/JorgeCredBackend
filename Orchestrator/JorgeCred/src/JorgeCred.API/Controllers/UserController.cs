@@ -21,8 +21,16 @@ namespace JorgeCred.API.Controllers
             UserManager = userManager;
         }
 
+        /// Método: POST
+        /// Rota:  /api/User/Register        
+        /// Parametros URI: Vazio
+        /// Parametros JSON:
+        ///     "email": "string"
+        ///     "password": "string"
+        ///     "passwordConfirmation": "string"
+        ///     "rolename": "string"
+        /// Essa rota é usada para fazer o registro de novos usuários. Recebe um payload JSON com as informações
         [HttpPost("Register")]
-        
         public async Task<IActionResult> Register(RegisterUserRequest registerUserRequest)
         {
             if (!ModelState.IsValid)
@@ -54,6 +62,11 @@ namespace JorgeCred.API.Controllers
             return BadRequest("Algo deu errado....");
         }
 
+        /// Método: POST
+        /// Rota:   /api/User/CreateAccount/{userId}    
+        /// Parametros URI: "userId" 
+        /// Parametros JSON: Vazio
+        /// Essa rota é usada para fazer o registro de novos usuários. Recebe um payload JSON com as informações
         [HttpPost("CreateAccount/{userId}")]
         public async Task<IActionResult> CreateAccount(string userId)
         {
@@ -76,6 +89,13 @@ namespace JorgeCred.API.Controllers
             return Ok();
         }
 
+        /// Método: POST
+        /// Rota:  /api/User/Login        
+        /// Parametros URI: Vazio
+        /// Parametros JSON:
+        ///     "username": "string"
+        ///     "password": "string"
+        /// Essa rota é usada para lidar com o login de usuários. Recebe um payload JSON com as credenciais do usuário.
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginRequest loginRequest)
         {
@@ -90,6 +110,13 @@ namespace JorgeCred.API.Controllers
         }
 
         [Authorize(Roles = "Admin")]
+
+        /// ESSA É UMA FUNÇÃO APENAS PARA ADMINS
+        /// Método: GET
+        /// Rota:  /api/User/ListUsers       
+        /// Parametros URI: Vazio
+        /// Parametros JSON: Vazio
+        /// Essa rota é usada para listar todos os usuários com contas registradas, não inclui informações sensíveis.
         [HttpGet("ListUsers")]
         public async Task<IActionResult> ListUsers()
         {
@@ -106,6 +133,11 @@ namespace JorgeCred.API.Controllers
             return Ok(users);
         }
 
+        /// Método: GET
+        /// Rota:  /api/User/GetUser        
+        /// Parametros URI: Vazio
+        /// Parametros JSON: Vazio
+        /// Essa rota retorna as credenciais do usuário logado no momento.
         [HttpGet("GetUser")]
         public async Task<IActionResult> GetUser()
         {
@@ -121,7 +153,13 @@ namespace JorgeCred.API.Controllers
 
          return Ok(user);
         }
-
+        
+        /// Método: POST
+        /// Rota:  /api/User/UpdateUserPassword     
+        /// Parametros URI: Vazio
+        /// Parametros JSON:
+        ///     "newPassword": "string"
+        /// Essa rota é usada para atualizar a senha do usuário, recebe a nova senha através de um payload JSON.
         [HttpPost("UpdateUserPassword")]
         public async Task<IActionResult> UpdateUserPassword([FromBody] changePasswordDTO newPassword) 
         {
